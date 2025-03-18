@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from models.airport import AirportModel
 from sqlalchemy.orm import Session
 
+
 class IAirportCRUD(ABC):
     def __init__(self, db: Session) -> None:
         self._db = db
@@ -20,9 +21,9 @@ class IAirportCRUD(ABC):
         pass
 
     @abstractmethod
-    async def add(self, ticket: AirportModel) -> AirportModel | None:
+    async def add(self, airport: AirportModel) -> AirportModel | None:
         pass
 
     @abstractmethod
-    async def delete(self, ticket: AirportModel) -> AirportModel:
+    async def delete(self, airport: AirportModel) -> AirportModel:
         pass

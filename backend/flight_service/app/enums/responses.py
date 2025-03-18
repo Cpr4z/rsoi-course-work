@@ -1,6 +1,12 @@
 from enum import Enum
 
-from schemas.response import ErrorResponse, ValidationErrorResponse
+from schemas.response import (
+    ErrorResponse,
+    ForbiddenResponse,
+    NotAuthorizedResponse,
+    ValidationErrorResponse,
+)
+
 
 class RespFlightEnum(Enum):
     GetAll = {
@@ -50,6 +56,15 @@ class RespFlightEnum(Enum):
         "model": ErrorResponse,
         "description": "Conflict",
     }
+    NotAuthorized = {
+        "model": NotAuthorizedResponse,
+        "description": "User is not authorized",
+    }
+    Forbidden = {
+        "model": ForbiddenResponse,
+        "description": "Method forbidden to access",
+    }
+
 
 class RespAirportEnum(Enum):
     GetAll = {
@@ -99,6 +114,15 @@ class RespAirportEnum(Enum):
         "model": ErrorResponse,
         "description": "Conflict",
     }
+    NotAuthorized = {
+        "model": NotAuthorizedResponse,
+        "description": "User is not authorized",
+    }
+    Forbidden = {
+        "model": ForbiddenResponse,
+        "description": "Method forbidden to access",
+    }
+
 
 class RespManageEnum(Enum):
     Health = {

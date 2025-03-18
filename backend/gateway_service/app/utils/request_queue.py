@@ -4,6 +4,7 @@ from time import sleep
 
 from utils.settings import get_settings
 
+
 class Request:
     def __init__(
         self,
@@ -19,8 +20,10 @@ class Request:
         self.data = data
         self.timeout = timeout
 
+
 class RequestQueue:
     gateway_settings = get_settings()["services"]["gateway"]
+
     _req_queue: dict[str, Request] = {}
     _req_sender: Thread | None = None
 
@@ -56,6 +59,7 @@ class RequestQueue:
                     args=(req_key,),
                 ).start()
             sleep(RequestQueue.gateway_settings["timeout"])
+
         RequestQueue._req_sender = None
 
     @staticmethod
@@ -63,6 +67,7 @@ class RequestQueue:
         req = RequestQueue._req_queue.get(key)
         if req is None:
             return
+
         try:
             resp = req.http_method(
                 url=req.url,

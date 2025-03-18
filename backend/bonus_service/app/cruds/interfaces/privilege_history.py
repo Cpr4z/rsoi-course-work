@@ -4,6 +4,7 @@ from models.privilege_history import PrivilegeHistoryModel
 from schemas.privilege_history import PrivilegeHistoryFilter
 from sqlalchemy.orm import Session
 
+
 class IPrivilegeHistoryCRUD(ABC):
     def __init__(self, db: Session) -> None:
         self._db = db

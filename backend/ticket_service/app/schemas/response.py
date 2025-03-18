@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 
+
 class ErrorResponse(BaseModel):
     model_config = ConfigDict(
         json_schema_extra={
@@ -8,6 +9,7 @@ class ErrorResponse(BaseModel):
             },
         },
     )
+
 
 class ValidationErrorResponse(BaseModel):
     model_config = ConfigDict(
@@ -21,6 +23,26 @@ class ValidationErrorResponse(BaseModel):
                         "loc": "error location",
                     },
                 ],
+            },
+        },
+    )
+
+
+class ForbiddenResponse(BaseModel):
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "message": "Error: Forbidden",
+            },
+        },
+    )
+
+
+class NotAuthorizedResponse(BaseModel):
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "message": "Error: Not Authorized",
             },
         },
     )

@@ -1,5 +1,4 @@
 import uvicorn
-
 from exceptions.handlers import (
     http_exception_handler,
     request_validation_exception_handler,
@@ -12,6 +11,7 @@ from fastapi.responses import JSONResponse
 from routers.api import router as api_router
 from utils.database import create_tables
 from utils.settings import get_settings
+
 
 def custom_openapi() -> dict:
     if not app.openapi_schema:
@@ -32,18 +32,22 @@ def custom_openapi() -> dict:
                 responses = param.get("responses")
                 if "422" in responses:
                     del responses["422"]
+
         del app.openapi_schema["components"]["schemas"]["HTTPValidationError"]
         del app.openapi_schema["components"]["schemas"]["ValidationError"]
+
     return app.openapi_schema
+
+
 create_tables()
 
 app = FastAPI(
     title="Flight Service",
     version="v1",
 )
-
 app.include_router(api_router, prefix="/api/v1")
 app.openapi = custom_openapi
+
 
 @app.exception_handler(HTTPException)
 async def custom_http_exception_handler(
@@ -52,12 +56,14 @@ async def custom_http_exception_handler(
 ) -> JSONResponse:
     return await http_exception_handler(request, exc)
 
+
 @app.exception_handler(RequestValidationError)
 async def custom_validation_exception_handler(
     request: Request,
     exc: HTTPException,
 ) -> JSONResponse:
     return await request_validation_exception_handler(request, exc)
+
 
 if __name__ == "__main__":
     settings = get_settings()

@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 from uuid import UUID
+
 from enums.sort import SortTicket
 from models.ticket import TicketModel
 from schemas.ticket import TicketFilter, TicketUpdate
 from sqlalchemy.orm import Session
+
 
 class ITicketCRUD(ABC):
     def __init__(self, db: Session) -> None:

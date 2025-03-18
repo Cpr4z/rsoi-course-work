@@ -3,6 +3,7 @@ from models.privilege_history import PrivilegeHistoryModel
 from schemas.privilege_history import PrivilegeHistoryFilter
 from sqlalchemy.orm import Query
 
+
 class PrivilegeHistoryCRUD(IPrivilegeHistoryCRUD):
     async def get_all(
         self,
@@ -12,6 +13,9 @@ class PrivilegeHistoryCRUD(IPrivilegeHistoryCRUD):
         privilege_histories = await self.__filter_histories(
             privilege_histories,
             privilege_history_filter,
+        )
+        privilege_histories = privilege_histories.order_by(
+            PrivilegeHistoryModel.id.desc(),
         )
 
         return privilege_histories.all()
@@ -45,6 +49,7 @@ class PrivilegeHistoryCRUD(IPrivilegeHistoryCRUD):
     ) -> PrivilegeHistoryModel:
         self._db.delete(privilege_history)
         self._db.commit()
+
         return privilege_history
 
     async def __filter_histories(

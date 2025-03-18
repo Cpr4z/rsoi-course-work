@@ -4,6 +4,7 @@ from models.privilege import PrivilegeModel
 from schemas.privilege import PrivilegeFilter, PrivilegeUpdate
 from sqlalchemy.orm import Session
 
+
 class IPrivilegeCRUD(ABC):
     def __init__(self, db: Session) -> None:
         self._db = db

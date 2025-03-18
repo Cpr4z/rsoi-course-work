@@ -8,6 +8,7 @@ from schemas.ticket import TicketCreate, TicketFilter, TicketUpdate
 from sqlalchemy.orm import Session
 from typing_extensions import Self
 
+
 class TicketService:
     def __init__(
         self: Self,
@@ -34,6 +35,7 @@ class TicketService:
         ticket = await self._ticketCRUD.get_by_uid(ticket_uid)
         if ticket is None:
             raise NotFoundException(prefix="Get Ticket")
+
         return ticket
 
     async def add(self, ticket_create: TicketCreate) -> TicketModel:
@@ -41,12 +43,14 @@ class TicketService:
         ticket = await self._ticketCRUD.add(ticket)
         if ticket is None:
             raise ConflictException(prefix="Add Ticket")
+
         return ticket
 
     async def delete(self, ticket_uid: UUID) -> TicketModel:
         ticket = await self._ticketCRUD.get_by_uid(ticket_uid)
         if ticket is None:
             raise NotFoundException(prefix="Delete Ticket")
+
         return await self._ticketCRUD.delete(ticket)
 
     async def patch(
@@ -57,7 +61,9 @@ class TicketService:
         ticket = await self._ticketCRUD.get_by_uid(ticket_uid)
         if ticket is None:
             raise NotFoundException(prefix="Update Ticket")
+
         ticket = await self._ticketCRUD.patch(ticket, ticket_update)
         if ticket is None:
             raise ConflictException(prefix="Update Ticket")
+
         return ticket

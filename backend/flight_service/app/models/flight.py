@@ -2,9 +2,11 @@ from models.airport import AirportModel
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
 from utils.database import Base
 
+
 class FlightModel(Base):
     __tablename__ = "flight"
     __table_args__ = {"extend_existing": True}
+
     id = Column(Integer, primary_key=True, index=True)
     flight_number = Column(String(20), unique=True, nullable=False)
     price = Column(Integer, nullable=False)

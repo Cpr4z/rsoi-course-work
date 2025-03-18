@@ -12,6 +12,7 @@ SessionLocal = sessionmaker(
 )
 Base = declarative_base()
 
+
 def get_db():  # noqa: ANN201
     """Получение сессии подключения к БД."""
     db = SessionLocal()
@@ -19,6 +20,7 @@ def get_db():  # noqa: ANN201
         yield db
     finally:
         db.close()
+
 
 def create_tables() -> None:
     """Создание таблиц, если они еще не были созданы."""

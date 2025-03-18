@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class SortTicket(Enum):
     UsernameAsc = "username_asc"
     UsernameDesc = "username_desc"

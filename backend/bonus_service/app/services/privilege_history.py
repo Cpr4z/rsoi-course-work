@@ -5,8 +5,8 @@ from schemas.privilege_history import (
     PrivilegeHistoryCreate,
     PrivilegeHistoryFilter,
 )
-
 from sqlalchemy.orm import Session
+
 
 class PrivilegeHistoryService:
     def __init__(
@@ -33,6 +33,7 @@ class PrivilegeHistoryService:
         )
         if privilege_history is None:
             raise NotFoundException(prefix="Get Privilege History")
+
         return privilege_history
 
     async def add(
@@ -50,6 +51,7 @@ class PrivilegeHistoryService:
                 prefix="Add Privilege History",
                 message="не существует привилегии с таким id",
             )
+
         return privilege_history
 
     async def delete(self, privilege_history_id: int) -> None:

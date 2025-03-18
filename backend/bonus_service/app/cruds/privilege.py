@@ -3,6 +3,7 @@ from models.privilege import PrivilegeModel
 from schemas.privilege import PrivilegeFilter, PrivilegeUpdate
 from sqlalchemy.orm import Query
 
+
 class PrivilegeCRUD(IPrivilegeCRUD):
     async def get_all(
         self,
@@ -38,6 +39,7 @@ class PrivilegeCRUD(IPrivilegeCRUD):
     async def delete(self, privilege: PrivilegeModel) -> PrivilegeModel:
         self._db.delete(privilege)
         self._db.commit()
+
         return privilege
 
     async def patch(
@@ -48,6 +50,7 @@ class PrivilegeCRUD(IPrivilegeCRUD):
         update_fields = privilege_update.model_dump(exclude_unset=True)
         for key, value in update_fields.items():
             setattr(privilege, key, value)
+
         try:
             self._db.add(privilege)
             self._db.commit()

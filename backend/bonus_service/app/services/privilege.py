@@ -4,6 +4,7 @@ from models.privilege import PrivilegeModel
 from schemas.privilege import PrivilegeCreate, PrivilegeFilter, PrivilegeUpdate
 from sqlalchemy.orm import Session
 
+
 class PrivilegeService:
     def __init__(
         self,
@@ -28,6 +29,7 @@ class PrivilegeService:
         privilege = await self._privilegeCRUD.get_by_id(privilege_id)
         if privilege is None:
             raise NotFoundException(prefix="Get Privilege")
+
         return privilege
 
     async def add(self, privilege_create: PrivilegeCreate) -> PrivilegeModel:
@@ -35,12 +37,14 @@ class PrivilegeService:
         privilege = await self._privilegeCRUD.add(privilege)
         if privilege is None:
             raise ConflictException(prefix="Add Privilege")
+
         return privilege
 
     async def delete(self, privilege_id: int) -> PrivilegeModel:
         privilege = await self._privilegeCRUD.get_by_id(privilege_id)
         if privilege is None:
             raise NotFoundException(prefix="Delete Privilege")
+
         return await self._privilegeCRUD.delete(privilege)
 
     async def patch(
@@ -51,10 +55,12 @@ class PrivilegeService:
         privilege = await self._privilegeCRUD.get_by_id(privilege_id)
         if privilege is None:
             raise NotFoundException(prefix="Update Privilege")
+
         privilege = await self._privilegeCRUD.patch(
             privilege,
             privilege_update,
         )
         if privilege is None:
             raise ConflictException(prefix="Update Privilege")
+
         return privilege

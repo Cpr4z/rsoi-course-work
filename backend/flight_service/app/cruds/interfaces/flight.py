@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 
+from enums.sort import SortFlights
 from models.flight import FlightModel
 from schemas.flight import FlightFilter
 from sqlalchemy.orm import Session
+
 
 class IFlightCRUD(ABC):
     def __init__(self, db: Session) -> None:
@@ -12,6 +14,7 @@ class IFlightCRUD(ABC):
     async def get_all(
         self,
         flight_filter: FlightFilter,
+        sort: SortFlights,
         offset: int = 0,
         limit: int = 100,
     ) -> list[FlightModel]:
@@ -22,9 +25,9 @@ class IFlightCRUD(ABC):
         pass
 
     @abstractmethod
-    async def add(self, ticket: FlightModel) -> FlightModel | None:
+    async def add(self, flight: FlightModel) -> FlightModel | None:
         pass
 
     @abstractmethod
-    async def delete(self, ticket: FlightModel) -> FlightModel:
+    async def delete(self, flight: FlightModel) -> FlightModel:
         pass
