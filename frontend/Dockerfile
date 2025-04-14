@@ -1,5 +1,10 @@
 FROM node:21-alpine as build
 
+RUN apk update && apk add --no-cache \
+    python3 \
+    make \
+    g++
+
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
