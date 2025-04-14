@@ -92,9 +92,22 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
-            docker compose stop gateway_service auth_service flight_service || true
-            docker compose build gateway_service auth_service flight_service
-            docker compose up -d gateway_service auth_service flight_service
+            sudo docker compose down
+            sudo docker rmi gateway_service
+            sudo docker rmi bonus_service
+            sudo docker rmi flight_service
+            sudo docker rmi ticket_service
+            sudo docker rmi auth_service
+            sudo docker rmi statistics_service
+            sudo docker rmi consumer_service
+            sudo mkdir auth_service/app/certs
+            sudo docker compose up -d --build
+
+#          script: |
+#            cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
+#            docker compose stop gateway_service auth_service flight_service || true
+#            docker compose build gateway_service auth_service flight_service
+#            docker compose up -d gateway_service auth_service flight_service
 
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -124,6 +137,13 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
-            docker compose stop dips-client || true
-            docker compose build dips-client
-            docker compose up -d dips-client
+            sudo docker compose down
+            sudo docker rmi dips-client
+            sudo docker compose up -d --build
+          
+
+#          script: |
+#            cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
+#            docker compose stop dips-client || true
+#            docker compose build dips-client
+#            docker compose up -d dips-client
