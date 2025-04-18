@@ -9,8 +9,11 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json package-lock.json ./
-RUN npm config set legacy-peer-deps true
-RUN npm install --legacy-peer-deps
+#RUN npm config set legacy-peer-deps true
+#RUN npm install --legacy-peer-deps
+RUN yarn install
+COPY . .
+RUN yarn build
 
 COPY . ./
 RUN npm run build
