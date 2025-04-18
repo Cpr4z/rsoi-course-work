@@ -5,8 +5,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json package-lock.json ./
 RUN npm config set legacy-peer-deps true
-RUN npm install --legacy-peer-deps --no-audit --no-fund
-#RUN npm ci --silent
+RUN npm install --legacy-peer-deps --no-audit --no-fund --verbose
 
 COPY . ./
 RUN npm run build
