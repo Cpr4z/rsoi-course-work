@@ -7,63 +7,6 @@ on:
     branches:
       - develop
 
-#jobs:
-#  deploy:
-#    name: Deploy
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Copy code
-#        uses: appleboy/scp-action@v0.1.4
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          key: ${{ secrets.SSH_KEY }}
-#          port: ${{ secrets.SSH_PORT }}
-#          source: "backend,frontend"
-#          target: /home/${{ secrets.SSH_USERNAME }}/dips
-#
-#      - name: Run backend
-#        uses: appleboy/ssh-action@v1.0.0
-#        env:
-#          WAIT_PORTS: 8080,8070,8060,8050,8090,8888
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          key: ${{ secrets.SSH_KEY }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
-#            sudo docker compose down
-#            sudo docker rmi gateway_service
-#            sudo docker rmi bonus_service
-#            sudo docker rmi flight_service
-#            sudo docker rmi ticket_service
-#            sudo docker rmi auth_service
-#            sudo docker rmi statistics_service
-#            sudo docker rmi consumer_service
-#            sudo mkdir auth_service/app/certs
-#            sudo docker compose up -d --build
-#
-#      - name: Run frontend
-#        uses: appleboy/ssh-action@v1.0.0
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          key: ${{ secrets.SSH_KEY }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
-#            sudo docker compose down
-#            sudo docker rmi dips-client
-#            sudo docker compose up -d --build
-
 jobs:
   deploy-backend:
     runs-on: ubuntu-latest
@@ -101,13 +44,7 @@ jobs:
             sudo docker rmi statistics_service
             sudo docker rmi consumer_service
             sudo mkdir auth_service/app/certs
-            sudo docker compose up -d --build
-
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
-#            docker compose stop gateway_service auth_service flight_service || true
-#            docker compose build gateway_service auth_service flight_service
-#            docker compose up -d gateway_service auth_service flight_service
+            sudo docker compose up -d --build --no-cache
 
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -139,11 +76,4 @@ jobs:
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
             sudo docker compose down
             sudo docker rmi dips-client
-            sudo docker compose up -d --build
-          
-
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
-#            docker compose stop dips-client || true
-#            docker compose build dips-client
-#            docker compose up -d dips-client
+            sudo docker compose up -d --build --no-cache
