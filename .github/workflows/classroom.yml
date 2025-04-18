@@ -22,8 +22,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./backend"
-          target: "/home/${{ secrets.SSH_USERNAME }}/dips/"
+          source: "backend"
+          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
 
       - name: Deploy Backend
         uses: appleboy/ssh-action@v1.0.0
@@ -61,8 +61,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./frontend/*"
-          target: "/home/${{ secrets.SSH_USERNAME }}/dips/frontend"
+          source: "frontend"
+          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
 
       - name: Deploy Frontend
         uses: appleboy/ssh-action@v1.0.0
@@ -76,4 +76,4 @@ jobs:
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
             sudo docker compose down
             sudo docker rmi dips-client
-            sudo docker compose build --no-cache && sudo docker compose up -d
+            sudo docker compose up -d --build
