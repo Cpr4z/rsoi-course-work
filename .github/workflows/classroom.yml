@@ -22,7 +22,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./backend"
+          source: "./backend/*"
           target: "/home/${{ secrets.SSH_USERNAME }}/dips/backend"
 
       - name: Deploy Backend
@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
-          source: "./frontend"
+          source: "./frontend/*"
           target: "/home/${{ secrets.SSH_USERNAME }}/dips/frontend"
 
       - name: Deploy Frontend
