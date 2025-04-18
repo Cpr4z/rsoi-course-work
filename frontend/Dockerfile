@@ -1,4 +1,4 @@
-FROM node:21-alpine as build
+FROM node:21-slim as build
 
 RUN apk update && apk add --no-cache \
     python3 \
