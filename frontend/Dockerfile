@@ -1,19 +1,12 @@
 FROM node:21-alpine as build
 
-RUN apk update && apk add --no-cache \
-    python3 \
-    make \
-    g++
-
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json package-lock.json ./
-#RUN npm config set legacy-peer-deps true
-#RUN npm install --legacy-peer-deps
-RUN yarn install
-COPY . .
-RUN yarn build
+RUN npm config set legacy-peer-deps true
+RUN npm install --legacy-peer-deps --no-audit --no-fund
+#RUN npm ci --silent
 
 COPY . ./
 RUN npm run build

@@ -7,106 +7,31 @@ on:
     branches:
       - develop
 
-#jobs:
-#  deploy-backend:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#
-#      - name: Copy backend files to server
-#        uses: appleboy/scp-action@v0.1.4
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_KEY }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          port: ${{ secrets.SSH_PORT }}
-#          source: "backend"
-#          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
-#
-#      - name: Deploy Backend
-#        uses: appleboy/ssh-action@v1.0.0
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_KEY }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
-#            sudo docker compose down
-#            sudo docker rmi gateway_service
-#            sudo docker rmi bonus_service
-#            sudo docker rmi flight_service
-#            sudo docker rmi ticket_service
-#            sudo docker rmi auth_service
-#            sudo docker rmi statistics_service
-#            sudo docker rmi consumer_service
-#            sudo mkdir auth_service/app/certs
-#            sudo docker compose up -d --build
-#
-#  deploy-frontend:
-#    runs-on: ubuntu-latest
-#    needs: deploy-backend
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#
-#      - name: Copy frontend files to server
-#        uses: appleboy/scp-action@v0.1.4
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_KEY }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          port: ${{ secrets.SSH_PORT }}
-#          source: "frontend"
-#          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
-#
-#      - name: Deploy Frontend
-#        uses: appleboy/ssh-action@v1.0.0
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_KEY }}
-#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: |
-#            cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
-#            sudo docker compose down
-#            sudo docker rmi dips-client
-#            sudo docker compose up -d --build
-
 jobs:
-  deploy:
-    name: Deploy
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Copy code
+      - name: Copy backend files to server
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
-          source: "backend,frontend"
-          target: /home/${{ secrets.SSH_USERNAME }}/dips
+          source: "backend"
+          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
 
-      - name: Run backend
+      - name: Deploy Backend
         uses: appleboy/ssh-action@v1.0.0
-        env:
-          WAIT_PORTS: 8080,8070,8060,8050,8090,8888
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
@@ -121,16 +46,91 @@ jobs:
             sudo mkdir auth_service/app/certs
             sudo docker compose up -d --build
 
-      - name: Run frontend
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: deploy-backend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy frontend files to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "frontend"
+          target: "/home/${{ secrets.SSH_USERNAME }}/dips"
+
+      - name: Deploy Frontend
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
             sudo docker compose down
             sudo docker rmi dips-client
             sudo docker compose up -d --build
+
+#jobs:
+#  deploy:
+#    name: Deploy
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Copy code
+#        uses: appleboy/scp-action@v0.1.4
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USERNAME }}
+#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+#          key: ${{ secrets.SSH_KEY }}
+#          port: ${{ secrets.SSH_PORT }}
+#          source: "backend,frontend"
+#          target: /home/${{ secrets.SSH_USERNAME }}/dips
+#
+#      - name: Run backend
+#        uses: appleboy/ssh-action@v1.0.0
+#        env:
+#          WAIT_PORTS: 8080,8070,8060,8050,8090,8888
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USERNAME }}
+#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+#          key: ${{ secrets.SSH_KEY }}
+#          port: ${{ secrets.SSH_PORT }}
+#          script: |
+#            cd /home/${{ secrets.SSH_USERNAME }}/dips/backend
+#            sudo docker compose down
+#            sudo docker rmi gateway_service
+#            sudo docker rmi bonus_service
+#            sudo docker rmi flight_service
+#            sudo docker rmi ticket_service
+#            sudo docker rmi auth_service
+#            sudo docker rmi statistics_service
+#            sudo docker rmi consumer_service
+#            sudo mkdir auth_service/app/certs
+#            sudo docker compose up -d --build
+#
+#      - name: Run frontend
+#        uses: appleboy/ssh-action@v1.0.0
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USERNAME }}
+#          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+#          key: ${{ secrets.SSH_KEY }}
+#          port: ${{ secrets.SSH_PORT }}
+#          script: |
+#            cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
+#            sudo docker compose down
+#            sudo docker rmi dips-client
+#            sudo docker compose up -d --build
