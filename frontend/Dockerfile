@@ -1,4 +1,4 @@
-FROM node:21-slim as build
+FROM node:21-alpine as build
 
 RUN apk update && apk add --no-cache \
     python3 \
@@ -11,7 +11,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json package-lock.json ./
 RUN npm config set legacy-peer-deps true
 #RUN npm ci --silent
-RUN npm ci
+RUN #npm ci
+RUN npm install --legacy-peer-deps
 
 COPY . ./
 RUN npm run build
