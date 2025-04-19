@@ -13,7 +13,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --network-timeout 600000 || cat /root/.yarn/logs/*.log
+RUN yarn install --network-timeout 600000
 
 COPY . .
 
