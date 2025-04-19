@@ -1,23 +1,14 @@
 FROM node:21-alpine as build
 
-RUN apk add --no-cache \
-  python3 \
-  make \
-  g++ \
-  libc6-compat \
-  curl \
-  git \
-  bash
-
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 600000 --verbose
+COPY package.json package-lock.json ./
+RUN npm config set legacy-peer-deps true
+RUN npm ci --verbose
 
-COPY . .
-
-RUN yarn build
+COPY . ./
+RUN npm run build
 
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
