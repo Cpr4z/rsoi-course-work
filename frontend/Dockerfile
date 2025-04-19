@@ -1,5 +1,14 @@
 FROM node:21-alpine as build
 
+RUN apk add --no-cache \
+  python3 \
+  make \
+  g++ \
+  libc6-compat \
+  curl \
+  git \
+  bash
+
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
