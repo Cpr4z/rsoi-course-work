@@ -3,9 +3,8 @@ FROM node:21-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json package-lock.json ./
-RUN npm config set legacy-peer-deps true
-RUN npm ci --verbose
+COPY package.json yarn.lock ./
+RUN yarn install --network-timeout 600000 --verbose
 
 COPY . ./
 RUN npm run build
