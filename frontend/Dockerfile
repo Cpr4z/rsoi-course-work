@@ -1,13 +1,13 @@
-FROM node:21-slim as build
+FROM node:21-alpine as build
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
   python3 \
   make \
   g++ \
+  libc6-compat \
   curl \
   git \
-  bash \
-  && rm -rf /var/lib/apt/lists/*
+  bash
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
