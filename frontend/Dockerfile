@@ -13,7 +13,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 600000
+RUN yarn install --network-timeout 600000 --verbose
 
 COPY . .
 
