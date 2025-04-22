@@ -76,5 +76,8 @@ jobs:
           script: |
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
             sudo docker compose down
-            sudo docker rmi dips-client
-            sudo docker compose up -d --build
+            sudo docker pull ghcr.io/cpr4z/frontend:latest
+            sudo docker compose up -d
+#            sudo docker compose down
+#            sudo docker rmi dips-client
+#            sudo docker compose up -d --build
