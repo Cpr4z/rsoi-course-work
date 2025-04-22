@@ -14,12 +14,6 @@ RUN while true; do echo "⏳ installing..."; sleep 60; done & \
 COPY . .
 RUN yarn build
 
-#COPY package.json yarn.lock ./
-#RUN yarn install --network-timeout 600000 --verbose
-
-#COPY . ./
-#RUN npm run build
-
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
