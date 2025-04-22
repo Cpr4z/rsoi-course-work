@@ -4,9 +4,5 @@ services:
   dips-client:
     image: ghcr.io/cpr4z/dips-client:latest
     container_name: dips-client
-    build:
-      context: .
-      dockerfile: Dockerfile
-
     ports:
       - "3000:80"
