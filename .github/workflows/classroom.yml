@@ -74,10 +74,8 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u cpr4z --password-stdin
             cd /home/${{ secrets.SSH_USERNAME }}/dips/frontend
             sudo docker compose down
             sudo docker pull ghcr.io/cpr4z/dips-client:latest
             sudo docker compose up -d
-#            sudo docker compose down
-#            sudo docker rmi dips-client
-#            sudo docker compose up -d --build
