@@ -7,6 +7,7 @@ router = APIRouter(
     tags=["Manage"],
 )
 
+
 @router.get(
     "/health/",
     status_code=status.HTTP_200_OK,
@@ -15,7 +16,6 @@ router = APIRouter(
         status.HTTP_200_OK: RespManageEnum.Health.value,
     },
 )
-
 async def health() -> Response:
     return Response(
         status_code=status.HTTP_200_OK,

@@ -1,18 +1,20 @@
 import time
 from threading import Thread
-import requests
 
+import requests
 from fastapi import status
 from utils.settings import get_settings
 
+
 class CircuitBreaker:
     gateway_settings = get_settings()["services"]["gateway"]
+
     _fail_statistic = {}
     _service_state = {}
     _waiter: Thread | None = None
 
     @staticmethod
-    def send_request(  # noqa: PLR0913
+    def send_request(
         url: str,
         http_method,  # noqa: ANN001
         headers: dict = {},
@@ -24,12 +26,15 @@ class CircuitBreaker:
         resp.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
         if http_method is None:
             return resp
+
         host_url = url[url.find("://") + 3 :]
         host_url = host_url[: host_url.find("/")]
+
         state = CircuitBreaker._service_state.get(host_url)
         if state == "unavailable":
             print(f"Service {host_url} is unavailable")
             return resp
+
         for _ in range(
             CircuitBreaker.gateway_settings["max_num_of_fails"] + 1,
         ):
@@ -50,12 +55,14 @@ class CircuitBreaker:
                     CircuitBreaker._fail_statistic[host_url] = 1
                 else:
                     CircuitBreaker._fail_statistic[host_url] += 1
+
         fail_num = CircuitBreaker._fail_statistic.get(host_url)
         if (
             fail_num is not None
             and fail_num > CircuitBreaker.gateway_settings["max_num_of_fails"]
         ):
             print(f"The number fails for {host_url} is overflow")
+
             CircuitBreaker._fail_statistic[host_url] = 0
             CircuitBreaker._service_state[host_url] = "unavailable"
             if CircuitBreaker._waiter is None:
@@ -63,6 +70,7 @@ class CircuitBreaker:
                     target=CircuitBreaker._wait_for_available,
                 )
                 CircuitBreaker._waiter.start()
+
         return resp
 
     @staticmethod
@@ -78,6 +86,7 @@ class CircuitBreaker:
                         args=(host_url,),
                     ).start()
                     is_end = False
+
         CircuitBreaker._waiter = None
 
     @staticmethod
