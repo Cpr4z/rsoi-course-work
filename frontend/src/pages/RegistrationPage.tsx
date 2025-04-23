@@ -3,13 +3,13 @@ import { IUser } from "../interfaces/User/IUser"
 
 
 interface RegistrationPageProps {
-    changeUser: (user: IUser | null) => void
+	changeUser: (user: IUser | null) => void
 }
 
 export function RegistrationPage({ changeUser }: RegistrationPageProps) {
-    return (
-        <Registration
-            changeUser={ changeUser }
-        />
-    )
+	return (
+		<Registration
+			changeUser={ changeUser }
+		/>
+	)
 }

@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 
 export function useTextInputRow() {
-    const [hint, setHint] = useState("");
+	const [hint, setHint] = useState("");
 
-    return {
-        hint,
-        setHint
-    };
+	return { 
+		hint, 
+		setHint
+	};
 };

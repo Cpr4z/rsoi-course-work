@@ -7,38 +7,38 @@ import { IUser } from '../../interfaces/User/IUser';
 
 
 export function useMiniDrawer() {
-    const theme = useTheme();
-    const [open, setOpen] = useState(false);
-    const [user, setUser] = useState<IUser | null>(null);
+	const theme = useTheme();
+	const [open, setOpen] = useState(false);
+	const [user, setUser] = useState<IUser | null>(null);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
 
-    const changeUser = (user: IUser | null) => {
-        setUser(user);
-    };
+	const changeUser = (user: IUser | null) => {
+		setUser(user);
+	};
 
-    const fetchCurrentUser = async () => {
-        if (AuthService.isAuth()) {
-            setUser(await UserService.getMe());
-        }
-    };
+	const fetchCurrentUser = async () => {
+		if (AuthService.isAuth()) {
+			setUser(await UserService.getMe());
+		}
+	};
 
-    useEffect(() => {
-        fetchCurrentUser();
-    }, []);
+	useEffect(() => {
+		fetchCurrentUser();
+	}, []);
 
-    return {
-        theme,
-        open,
-        user,
-        handleDrawerOpen,
-        handleDrawerClose,
-        changeUser,
-    };
+	return { 
+		theme,
+		open,
+		user,
+		handleDrawerOpen,
+		handleDrawerClose,
+		changeUser,
+	};
 };

@@ -2,19 +2,19 @@ import { useState } from 'react';
 
 
 export function useDropdownList() {
-    const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+	const handleClick = () => {
+		setOpen(!open);
+	};
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+	const handleOpen = () => {
+		setOpen(true);
+	};
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+	const handleClose = () => {
+		setOpen(false);
+	};
 
-    return { open, handleClick, handleOpen, handleClose };
+	return { open, handleClick, handleOpen, handleClose };
 };

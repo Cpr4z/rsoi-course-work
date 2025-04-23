@@ -3,13 +3,13 @@ import { IUser } from "../interfaces/User/IUser"
 
 
 interface AuthorizationPageProps {
-    changeUser: (user: IUser | null) => void
+	changeUser: (user: IUser | null) => void
 }
 
 export function AuthorizationPage({ changeUser }: AuthorizationPageProps) {
-    return (
-        <Authorization
-            changeUser={ changeUser }
-    />
-)
+	return (
+		<Authorization
+			changeUser={ changeUser }
+		/>
+	)
 }

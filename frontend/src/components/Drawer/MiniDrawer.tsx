@@ -18,124 +18,124 @@ import { useDropdownList } from '../../hooks/useDrawers/useDropdownList';
 export const drawerWidth = 260;
 
 const openedMixin = (theme: Theme): CSSObject => ({
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
-    overflowX: 'hidden',
+	width: drawerWidth,
+	transition: theme.transitions.create('width', {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.enteringScreen,
+	}),
+	overflowX: 'hidden',
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+	transition: theme.transitions.create('width', {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	overflowX: 'hidden',
+	width: `calc(${theme.spacing(7)} + 1px)`,
+	[theme.breakpoints.up('sm')]: {
+		width: `calc(${theme.spacing(8)} + 1px)`,
+	},
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'flex-end',
+	padding: theme.spacing(0, 1),
+	// necessary for content to be below app bar
+	...theme.mixins.toolbar,
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        width: drawerWidth,
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        boxSizing: 'border-box',
-        ...(open && {
-            ...openedMixin(theme),
-            '& .MuiDrawer-paper': openedMixin(theme),
-        }),
-        ...(!open && {
-            ...closedMixin(theme),
-            '& .MuiDrawer-paper': closedMixin(theme),
-        }),
-    }),
+	({ theme, open }) => ({
+		width: drawerWidth,
+		flexShrink: 0,
+		whiteSpace: 'nowrap',
+		boxSizing: 'border-box',
+		...(open && {
+			...openedMixin(theme),
+			'& .MuiDrawer-paper': openedMixin(theme),
+		}),
+		...(!open && {
+			...closedMixin(theme),
+			'& .MuiDrawer-paper': closedMixin(theme),
+		}),
+	}),
 );
 
 
 interface MiniDrawerProps {
-    theme: Theme
-    open: boolean
-    user: IUser | null
-    handleDrawerOpen: () => void
-    handleDrawerClose: () => void
-    changeUser: (user: IUser | null) => void
-    children?: React.ReactNode
+	theme: Theme
+	open: boolean
+	user: IUser | null
+	handleDrawerOpen: () => void
+	handleDrawerClose: () => void
+	changeUser: (user: IUser | null) => void
+	children?: React.ReactNode
 }
 
 export function MiniDrawer(props: MiniDrawerProps) {
-    const dropdownList = useDropdownList();
+	const dropdownList = useDropdownList();
+	
+	return (
+		<Box sx={{ display: 'flex'}}>
+			<DrawerNavBar
+				open={ props.open }
+				user={ props.user }
+				handleDrawerOpen={ props.handleDrawerOpen }
+				handleDrawerClose={ () => {
+					dropdownList.handleClose();
+					props.handleDrawerClose();
+				}}
+				changeUser={ props.changeUser }
+			/>
 
-    return (
-        <Box sx={{ display: 'flex'}}>
-            <DrawerNavBar
-                open={ props.open }
-                user={ props.user }
-                handleDrawerOpen={ props.handleDrawerOpen }
-                handleDrawerClose={ () => {
-                    dropdownList.handleClose();
-                    props.handleDrawerClose();
-                }}
-                changeUser={ props.changeUser }
-            />
+			<Drawer variant="permanent" open={ props.open }>
+				<DrawerHeader />
+				<Divider />
+				<List>
+					<DrawerListItem
+						openDrawer={ props.open }
+						text="Список полетов"
+						link="/"
+						icon={ <FlightIcon /> }
+					/>
+					{ props.user &&
+						<DrawerListItem
+							openDrawer={ props.open }
+							text="Билеты"
+							link="/tickets"
+							icon={ <AirplaneTicketIcon /> }
+						/>
+					}
+					{ props.user &&
+						<DrawerListItem
+							openDrawer={ props.open }
+							text="Аккаунт"
+							link="/account"
+							icon={ <AccountBoxIcon /> }
+						/>
+					}
+					{ props.user && props.user.role === "ADMIN" &&
+						<DrawerListItem
+							openDrawer={ props.open }
+							text="Статистика"
+							link="/statistics"
+							icon={ <BarChartIcon /> }
+						/>
+					}
+				</List>
+				<Divider />
+			</Drawer>
 
-            <Drawer variant="permanent" open={ props.open }>
-                <DrawerHeader />
-                <Divider />
-                <List>
-                    <DrawerListItem
-                        openDrawer={ props.open }
-                        text="Список полетов"
-                        link="/"
-                        icon={ <FlightIcon /> }
-                    />
-                    { props.user &&
-                        <DrawerListItem
-                            openDrawer={ props.open }
-                            text="Билеты"
-                            link="/tickets"
-                            icon={ <AirplaneTicketIcon /> }
-                        />
-                    }
-                    { props.user &&
-                        <DrawerListItem
-                            openDrawer={ props.open }
-                            text="Аккаунт"
-                            link="/account"
-                            icon={ <AccountBoxIcon /> }
-                        />
-                    }
-                    { props.user && props.user.role === "ADMIN" &&
-                        <DrawerListItem
-                            openDrawer={ props.open }
-                            text="Статистика"
-                            link="/statistics"
-                            icon={ <BarChartIcon /> }
-                        />
-                    }
-                </List>
-                <Divider />
-            </Drawer>
-
-            <Box
-                component="main"
-                sx={{ flexGrow: 1 }}
-            >
-                <DrawerHeader />
-                { props.children }
-            </Box>
-        </Box>
-    );
+			<Box 
+				component="main" 
+				sx={{ flexGrow: 1 }}
+			>
+				<DrawerHeader />
+				{ props.children }
+			</Box>
+		</Box>
+	);
 }

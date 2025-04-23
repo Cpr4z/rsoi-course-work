@@ -6,24 +6,24 @@ import { ITicket } from '../../interfaces/Ticket/ITicket';
 
 
 export function useTicketInfoWindow() {
-    const [ticket, setTicket] = useState<ITicket>();
-    const [visibility, setVisibility] = useState(false);
-    const navigate = useNavigate();
+	const [ticket, setTicket] = useState<ITicket>();
+	const [visibility, setVisibility] = useState(false);
+	const navigate = useNavigate();
 
-    const handleOpenWindow = async (ticketUid: string) => {
-        const response = await GatewayService.getInfoOnUserTicket(ticketUid);
-        if (response) {
-            setTicket(response.data);
-            setVisibility(true);
-        } else {
-            navigate("/network_error");
-        }
-    };
+	const handleOpenWindow = async (ticketUid: string) => {
+		const response = await GatewayService.getInfoOnUserTicket(ticketUid);
+		if (response) {
+			setTicket(response.data);
+			setVisibility(true);
+		} else {
+			navigate("/network_error");
+		}
+	};
 
-    const handleCloseWindow = () => {
-        setVisibility(false);
-        setTicket(undefined);
-    };
+	const handleCloseWindow = () => {
+		setVisibility(false);
+		setTicket(undefined);
+	};
 
-    return { visibility, ticket, handleOpenWindow, handleCloseWindow };
+	return { visibility, ticket, handleOpenWindow, handleCloseWindow };
 };

@@ -12,96 +12,96 @@ import { IUser } from '../../interfaces/User/IUser';
 
 
 interface AuthorizationProps {
-    changeUser: (user: IUser | null) => void
+	changeUser: (user: IUser | null) => void
 }
 
 export function Authorization({ changeUser }: AuthorizationProps) {
-    const submitHandler = (event: React.FormEvent) => {
-        event.preventDefault();
-    };
+	const submitHandler = (event: React.FormEvent) => {
+		event.preventDefault();
+	};
 
-    const keyDownHandler = async (event: React.KeyboardEvent) => {
-        if (event.key === "Escape") {
-            await auth();
-        }
+	const keyDownHandler = async (event: React.KeyboardEvent) => {
+		if (event.key === "Escape") {
+			await auth();
+		}
+	}
+
+	const auth = async () => {
+    if (fieldsCheck()) {
+      const response = await AuthService.login(login, password);
+      if (response) {
+        setErrorMsg(response);
+      } else {
+				changeUser(await UserService.getMe());
+        navigate("/");
+      }
     }
+  };
 
-    const auth = async () => {
-        if (fieldsCheck()) {
-            const response = await AuthService.login(login, password);
-            if (response) {
-                setErrorMsg(response);
-            } else {
-                changeUser(await UserService.getMe());
-                navigate("/");
-            }
-        }
-    };
+	const navigate = useNavigate();
 
-    const navigate = useNavigate();
+	const { 
+		login,
+		password,
+		errorMsg,
+		invalidLogin,
+		invalidPassword,
+		setLogin,
+		setPassword,
+		setErrorMsg,
+		setInvalidLogin,
+		setInvalidPassword,
+		fieldsCheck,
+	} = useAuthorizationForm()
 
-    const {
-        login,
-        password,
-        errorMsg,
-        invalidLogin,
-        invalidPassword,
-        setLogin,
-        setPassword,
-        setErrorMsg,
-        setInvalidLogin,
-        setInvalidPassword,
-        fieldsCheck,
-    } = useAuthorizationForm()
+	return (
+		<>
+			<div className="authorization-window">
+				<form 
+					onSubmit={ submitHandler } 
+					onKeyDown={ keyDownHandler }
+				>
+					<TextHeader text="Авторизация"/>
+					
+					<div className="mb-5">
+						<InputRow
+							label="Логин*"
+							value={ login }
+							setValue={ setLogin }
+							isInvalidRow={ invalidLogin }
+							helperText="Обязательное поле"
+							keyDownHandler={ () => setInvalidLogin(false) }
+						/>
+					</div>
 
-    return (
-        <>
-            <div className="authorization-window">
-                <form
-                    onSubmit={ submitHandler }
-                    onKeyDown={ keyDownHandler }
-                >
-                    <TextHeader text="Авторизация"/>
+					<InputRow
+						label="Пароль*"
+						value={ password }
+						setValue={ setPassword }
+						type="password"
+						isInvalidRow={ invalidPassword }
+						helperText="Обязательное поле"
+						keyDownHandler={ () => setInvalidPassword(false) }
+					/>
 
-                    <div className="mb-5">
-                        <InputRow
-                            label="Логин*"
-                            value={ login }
-                            setValue={ setLogin }
-                            isInvalidRow={ invalidLogin }
-                            helperText="Обязательное поле"
-                            keyDownHandler={ () => setInvalidLogin(false) }
-                        />
-                    </div>
+					{ errorMsg &&
+						<Alert
+							sx={{fontWeight: 1000}}
+							severity="error"
+							className="mt-5"
+						>
+							{ errorMsg }
+						</Alert>
+					}
 
-                    <InputRow
-                        label="Пароль*"
-                        value={ password }
-                        setValue={ setPassword }
-                        type="password"
-                        isInvalidRow={ invalidPassword }
-                        helperText="Обязательное поле"
-                        keyDownHandler={ () => setInvalidPassword(false) }
-                    />
-
-                    { errorMsg &&
-                        <Alert
-                            sx={{fontWeight: 1000}}
-                            severity="error"
-                            className="mt-5"
-                        >
-                            { errorMsg }
-                        </Alert>
-                    }
-
-                    <div className="h-11 mt-5 flex flex-col justify-center">
-                        <AuthorizeFormButton
-                            text="Войти"
-                            onClick={ auth }
-                        />
-                    </div>
-                </form>
-            </div>
-        </>
-    )
+					<div className="h-11 mt-5 flex flex-col justify-center">
+						<AuthorizeFormButton 
+							text="Войти"
+							onClick={ auth }
+						/>
+					</div>
+				</form>
+			</div>
+		</>
+	)
 }

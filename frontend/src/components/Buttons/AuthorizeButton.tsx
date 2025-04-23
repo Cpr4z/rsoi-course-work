@@ -4,20 +4,20 @@ import "./Buttons.css";
 
 
 interface AuthorizeButtonProps {
-    text: string
-    link: string
-    onClick?: () => void
+	text: string
+	link: string
+	onClick?: () => void
 }
 
 export function AuthorizeButton({ text, link, onClick }: AuthorizeButtonProps) {
-    return (
-        <Link to={ link }>
-            <button
-                className="authorize-button"
-                onClick={ onClick }
-            >
-                { text }
-            </button>
-        </Link>
-    )
+	return (
+		<Link to={ link }>
+			<button 
+				className="authorize-button"
+				onClick={ onClick }
+			>
+				{ text }
+			</button>
+		</Link>
+	)
 }

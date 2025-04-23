@@ -2,15 +2,15 @@ import { useState } from 'react';
 
 
 export function useWindow() {
-    const [visibility, setVisibility] = useState(false);
+	const [visibility, setVisibility] = useState(false);
 
-    const handleOpenWindow = () => {
-        setVisibility(true);
-    };
+	const handleOpenWindow = () => {
+		setVisibility(true);
+	};
 
-    const handleCloseWindow = () => {
-        setVisibility(false);
-    };
+	const handleCloseWindow = () => {
+		setVisibility(false);
+	};
 
-    return { visibility, handleOpenWindow, handleCloseWindow };
+	return { visibility, handleOpenWindow, handleCloseWindow };
 };

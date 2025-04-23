@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @layer components {
-  body {
-    @apply bg-gray-200;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-size: cover;
-  }
+	body {
+		@apply bg-gray-200;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-size: cover;
+	}
 
-  :active, :hover, :focus {
-    outline: 0;
-    outline-offset: 0;
-  }
+	:active, :hover, :focus {
+		outline: 0;
+		outline-offset: 0;
+	}
 }
