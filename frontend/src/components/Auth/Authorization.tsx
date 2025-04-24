@@ -1,4 +1,6 @@
 import Alert from '@mui/material/Alert';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from "react-router-dom";
 
 import "../ModalWindows/ModalWindows.css";
@@ -66,6 +68,7 @@ export function Authorization({ changeUser }: AuthorizationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Логин*"
+							icon={<AccountCircleIcon />}
 							value={ login }
 							setValue={ setLogin }
 							isInvalidRow={ invalidLogin }
@@ -76,6 +79,7 @@ export function Authorization({ changeUser }: AuthorizationProps) {
 
 					<InputRow
 						label="Пароль*"
+						icon={<LockIcon />}
 						value={ password }
 						setValue={ setPassword }
 						type="password"

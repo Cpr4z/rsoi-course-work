@@ -1,5 +1,5 @@
+import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
-
 
 interface InputRowProps {
 	label: string
@@ -10,6 +10,7 @@ interface InputRowProps {
 	disabled?: boolean
 	helperText?: string
 	keyDownHandler?: () => void
+	icon?: React.ReactNode;
 }
 
 export function InputRow(props: InputRowProps) {
@@ -33,6 +34,13 @@ export function InputRow(props: InputRowProps) {
 			disabled={ props.disabled }
 			helperText={ props.isInvalidRow ? props.helperText : "" }
 			autoComplete="off"
+			InputProps={{
+				startAdornment: props.icon && (
+					<InputAdornment position="start">
+						{props.icon}
+					</InputAdornment>
+				)
+			}}
 		/>
 	)
 }

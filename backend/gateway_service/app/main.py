@@ -46,7 +46,7 @@ def custom_openapi() -> dict:
 
 
 app = FastAPI(
-    title="Flight Booking System",
+    title="SkyReserve",
     version="v1",
 )
 app.add_middleware(

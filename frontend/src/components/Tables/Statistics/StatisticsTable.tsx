@@ -70,14 +70,30 @@ export function StatisticsTable() {
 			<div className="flex flex-row h-full">
 				<div className="flex flex-col h-full mr-5">
 					<PieChart 
-						series={[{data: statusCodeData, innerRadius: 80 }]
-					} {...size}>
+						series={[{
+							data: statusCodeData,
+							innerRadius: 80,
+						}]}
+						legend={{
+							direction: 'column',
+							position: { vertical: 'middle', horizontal: 'right' },
+						}}
+						colors={['#66BB6A', '#FFA726', '#EF5350', '#29B6F6']}
+						{...size}>
 						<PieCenterLabel>Status</PieCenterLabel>
 					</PieChart>
 
 					<PieChart 
-						series={[{data: methodData, innerRadius: 80 }]
-					} {...size}>
+						series={[{
+							data: methodData,
+							innerRadius: 80,
+						}]}
+						legend={{
+							direction: 'column',
+							position: { vertical: 'middle', horizontal: 'right' },
+						}}
+						colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
+						{...size}>
 						<PieCenterLabel>Method</PieCenterLabel>
 					</PieChart>
 				</div>
