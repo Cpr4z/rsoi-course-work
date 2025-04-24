@@ -2,7 +2,7 @@ version: '3.1'
 
 services: 
   dips-client:
-    image: ghcr.io/cpr4z/dips-client:latest@sha256:411b5eb12a1652dddbd82135fd48c9d672a745ed45ada2362affb7b632575f81
+    image: ghcr.io/cpr4z/dips-client:latest@sha256:57d2a6b75174ed52c78595c6cdc70a0fc928486be32f2eec2288f9a97f4f6a19
     container_name: dips-client
 
     ports:

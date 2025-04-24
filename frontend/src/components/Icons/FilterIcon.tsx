@@ -1,5 +1,5 @@
 import SearchIcon from '@mui/icons-material/Search';
-import SearchOffIcon from '@mui/icons-material/FilterOff';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 
 import "./Icons.css";
 

@@ -12,7 +12,7 @@ interface NavBarButtonProps {
 
 export function NavBarButton({ text, link }: NavBarButtonProps) {
 	return (
-		<Link to="/" style={{ textDecoration: 'none' }}>
+		<Link to={link} style={{ textDecoration: 'none' }}>
 			<Box display="flex" alignItems="center" ml={2}>
 				<FlightIcon sx={{ color: 'white', fontSize: 28, mr: 1 }} />
 				<Typography
@@ -25,10 +25,9 @@ export function NavBarButton({ text, link }: NavBarButtonProps) {
 						fontSize: '1.5rem',
 					}}
 				>
-					SkyReserve
+					{text}
 				</Typography>
 			</Box>
 		</Link>
 	);
-}
 }

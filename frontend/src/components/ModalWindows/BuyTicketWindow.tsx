@@ -65,7 +65,7 @@ export function BuyTicketWindow(props: BuyTicketWindowProps) {
 
 					<div className="m-5 flex flex-row justify-center items-center">
 						<TextField
-							text="Воспользоваться бонусами для оплаты билета"
+							text="Использовать бонусные баллы"
 							addClassName="w-full"
 						/>
 						<Switch 

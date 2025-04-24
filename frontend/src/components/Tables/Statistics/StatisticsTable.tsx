@@ -131,6 +131,7 @@ export function StatisticsTable() {
 						</PieChart>
 					</div>
 				</div>
-			</>
-			)
-			}
+			</div>
+		</>
+		)
+		}
