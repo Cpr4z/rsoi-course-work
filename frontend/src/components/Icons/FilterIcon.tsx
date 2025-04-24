@@ -20,8 +20,8 @@ export function FilterIcon(props: FilterIconProps) {
 				onClick={ props.onClick }
 			>
 				{ props.selected
-					? <SearchIcon fontSize="medium" sx={{ color: props.color }}/>
-					: <SearchOffIcon fontSize="medium" sx={{ color: props.color }}/>
+					? <SearchOffIcon fontSize="medium" sx={{ color: props.color }}/>
+					: <SearchIcon fontSize="medium" sx={{ color: props.color }}/>
 				}
 			</div>
 		</div>

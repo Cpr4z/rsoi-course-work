@@ -99,37 +99,33 @@ export function StatisticsTable() {
 				</div>
 
 				<div className="flex flex-col h-full mr-5 space-y-5">
-					<div className="w-[350px] max-w-[90%]">
-						<PieChart
-							series={[{
-								data: statusCodeData,
-								innerRadius: 80,
-							}]}
-							legend={{
-								direction: 'column',
-								position: {vertical: 'middle', horizontal: 'right'},
-							}}
-							colors={['#66BB6A', '#FFA726', '#EF5350', '#29B6F6']}
-							{...size}>
-							<PieCenterLabel>Status</PieCenterLabel>
-						</PieChart>
-					</div>
+					<PieChart
+						series={[{
+							data: statusCodeData,
+							innerRadius: 80,
+						}]}
+						legend={{
+							direction: 'column',
+							position: {vertical: 'middle', horizontal: 'right'},
+						}}
+						colors={['#66BB6A', '#FFA726', '#EF5350', '#29B6F6']}
+						{...size}>
+						<PieCenterLabel>Status</PieCenterLabel>
+					</PieChart>
 
-					<div className="w-[350px] max-w-[90%]">
-						<PieChart
-							series={[{
-								data: methodData,
-								innerRadius: 80,
-							}]}
-							legend={{
-								direction: 'column',
-								position: {vertical: 'middle', horizontal: 'right'},
-							}}
-							colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
-							{...size}>
-							<PieCenterLabel>Method</PieCenterLabel>
-						</PieChart>
-					</div>
+					<PieChart
+						series={[{
+							data: methodData,
+							innerRadius: 80,
+						}]}
+						legend={{
+							direction: 'row',
+							position: {vertical: 'bottom', horizontal: 'middle'},
+						}}
+						colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
+						{...size}>
+						<PieCenterLabel>Method</PieCenterLabel>
+					</PieChart>
 				</div>
 			</div>
 		</>
