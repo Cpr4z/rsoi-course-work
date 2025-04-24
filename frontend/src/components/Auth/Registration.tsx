@@ -1,4 +1,10 @@
 import Alert from '@mui/material/Alert';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
+import PersonIcon from '@mui/icons-material/Person';
+import FaceIcon from '@mui/icons-material/Face';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 import { useNavigate } from "react-router-dom";
 
 import "../ModalWindows/ModalWindows.css";
@@ -84,6 +90,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Логин*"
+							icon={<AccountCircleIcon/>}
 							value={ login }
 							setValue={ setLogin }
 							isInvalidRow={ invalidLogin }
@@ -95,6 +102,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Пароль*"
+							icon={<LockIcon/>}
 							value={ password }
 							setValue={ setPassword }
 							type="password"
@@ -107,6 +115,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Фамилия*"
+							icon={<PersonIcon/>}
 							value={ lastname }
 							setValue={ setLastname }
 							isInvalidRow={ invalidLastname }
@@ -118,6 +127,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Имя*"
+							icon={<FaceIcon/>}
 							value={ firstname }
 							setValue={ setFirstname }
 							isInvalidRow={ invalidFirstname }
@@ -129,6 +139,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 					<div className="mb-5">
 						<InputRow
 							label="Почта*"
+							icon={<EmailIcon/>}
 							value={ email }
 							setValue={ setEmail }
 							isInvalidRow={ invalidEmail }
@@ -139,6 +150,7 @@ export function Registration({ changeUser }: RegistrationProps) {
 
 					<InputRow
 						label="Телефон*"
+						icon={<PhoneIcon/>}
 						value={ phone }
 						setValue={ setPhone }
 						isInvalidRow={ invalidPhone }

@@ -1,4 +1,4 @@
-import BackspaceIcon from '@mui/icons-material/Backspace';
+import UndoIcon from '@mui/icons-material/Undo';
 
 import "./Icons.css";
 
@@ -17,7 +17,7 @@ export function RefundIcon(props: RefundIconProps) {
 				className={ `icon ${props.addClassName}` }
 				onClick={ props.onClick }
 			>
-				<BackspaceIcon fontSize="medium" sx={{ color: props.color }}/>
+				<UndoIcon fontSize="medium" sx={{ color: props.color }}/>
 			</div>
 		</div>
 	)

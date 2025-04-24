@@ -68,66 +68,69 @@ export function StatisticsTable() {
 	return (
 		<>
 			<div className="flex flex-row h-full">
-				<div className="flex flex-col h-full mr-5">
-					<PieChart 
-						series={[{
-							data: statusCodeData,
-							innerRadius: 80,
-						}]}
-						legend={{
-							direction: 'column',
-							position: { vertical: 'middle', horizontal: 'right' },
-						}}
-						colors={['#66BB6A', '#FFA726', '#EF5350', '#29B6F6']}
-						{...size}>
-						<PieCenterLabel>Status</PieCenterLabel>
-					</PieChart>
-
-					<PieChart 
-						series={[{
-							data: methodData,
-							innerRadius: 80,
-						}]}
-						legend={{
-							direction: 'column',
-							position: { vertical: 'middle', horizontal: 'right' },
-						}}
-						colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
-						{...size}>
-						<PieCenterLabel>Method</PieCenterLabel>
-					</PieChart>
-				</div>
-
 				<div className="mx-5 table">
-					<StatisticsTitleRow />
+					<StatisticsTitleRow/>
 
 					<div className="rows-container">
-						{ !error
-							?	<div className="rows">
-									{ statistics.map((item, index) => 
-											<StatisticsRow 
-												key={ item.id }
-												statistics={ item } 
-												addClassName={index % 2 ? "bg-gray-200": "bg-white"}
-											/>
-										)
-									}
-								</div>
-							: <DataLoadError 
-									handleUpdate={ handleUpdateTable }
-								/>
+						{!error
+							? <div className="rows">
+								{statistics.map((item, index) =>
+									<StatisticsRow
+										key={item.id}
+										statistics={item}
+										addClassName={index % 2 ? "bg-gray-200" : "bg-white"}
+									/>
+								)
+								}
+							</div>
+							: <DataLoadError
+								handleUpdate={handleUpdateTable}
+							/>
 						}
 					</div>
 
 					<TablePagination
-						amountItems={ amountStatistics }
-						page={ page }
-						handleChangePage={ handleChangePage }
-						rowsPerPage={ rowsPerPage }
-						handleChangeRowsPerPage={ handleChangeRowsPerPage }
+						amountItems={amountStatistics}
+						page={page}
+						handleChangePage={handleChangePage}
+						rowsPerPage={rowsPerPage}
+						handleChangeRowsPerPage={handleChangeRowsPerPage}
 					/>
 				</div>
-			</div>
-		</>
-	)
-}
+
+				<div className="flex flex-col h-full mr-5 space-y-5">
+					<div className="w-[350px] max-w-[90%]">
+						<PieChart
+							series={[{
+								data: statusCodeData,
+								innerRadius: 80,
+							}]}
+							legend={{
+								direction: 'column',
+								position: {vertical: 'middle', horizontal: 'right'},
+							}}
+							colors={['#66BB6A', '#FFA726', '#EF5350', '#29B6F6']}
+							{...size}>
+							<PieCenterLabel>Status</PieCenterLabel>
+						</PieChart>
+					</div>
+
+					<div className="w-[350px] max-w-[90%]">
+						<PieChart
+							series={[{
+								data: methodData,
+								innerRadius: 80,
+							}]}
+							legend={{
+								direction: 'column',
+								position: {vertical: 'middle', horizontal: 'right'},
+							}}
+							colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
+							{...size}>
+							<PieCenterLabel>Method</PieCenterLabel>
+						</PieChart>
+					</div>
+				</div>
+			</>
+			)
+			}

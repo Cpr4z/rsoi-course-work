@@ -1,4 +1,5 @@
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartIcon';
 
 import "./Icons.css";
 
@@ -17,7 +18,7 @@ export function PayIcon(props: PayIconProps) {
 				className={ `pay-icon ${props.addClassName}` }
 				onClick={ props.onClick }
 			>
-				<AccountBalanceWalletIcon fontSize="medium" sx={{ color: props.color }}/>
+				<ShoppingCartIcon fontSize="medium" sx={{ color: props.color }}/>
 			</div>
 		</div>
 	)

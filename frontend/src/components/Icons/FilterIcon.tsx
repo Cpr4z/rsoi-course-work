@@ -1,5 +1,5 @@
-import FilterListIcon from '@mui/icons-material/FilterList';
-import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/FilterOff';
 
 import "./Icons.css";
 
@@ -20,8 +20,8 @@ export function FilterIcon(props: FilterIconProps) {
 				onClick={ props.onClick }
 			>
 				{ props.selected
-					? <FilterListIcon fontSize="medium" sx={{ color: props.color }}/> 
-					: <FilterListOffIcon fontSize="medium" sx={{ color: props.color }}/> 
+					? <SearchIcon fontSize="medium" sx={{ color: props.color }}/>
+					: <SearchOffIcon fontSize="medium" sx={{ color: props.color }}/>
 				}
 			</div>
 		</div>
