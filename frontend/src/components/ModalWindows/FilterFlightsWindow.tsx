@@ -151,7 +151,7 @@ export function FilterFlightsWindow({ filterTable, onFilter, onClose }: FilterFl
 						<div>
 							<FilterIcon
 								color="gray"
-								selected={ false }
+								selected={ true }
 								onClick={ clearFilterFields }
 								addClassName="py-2 px-2 hover:bg-gray-900/10"
 								addContainerClassName="basis-1/2"

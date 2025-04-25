@@ -12,7 +12,7 @@ import { useStatisticsTable } from "../../../hooks/useTables/useStatisticsTable"
 
 
 const size = {
-  width: 400,
+  width: 300,
   height: 300,
 };
 
@@ -119,8 +119,8 @@ export function StatisticsTable() {
 							innerRadius: 80,
 						}]}
 						legend={{
-							direction: 'row',
-							position: {vertical: 'bottom', horizontal: 'middle'},
+							direction: 'column',
+							position: {vertical: 'middle', horizontal: 'right'},
 						}}
 						colors={['#4C6EF5', '#15AABF', '#5C7CFA', '#F783AC', '#63E6BE', '#FFD43B', '#FF922B', '#845EF7', '#74C0FC']}
 						{...size}>

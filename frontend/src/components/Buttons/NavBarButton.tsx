@@ -19,7 +19,7 @@ export function NavBarButton({ text, link }: NavBarButtonProps) {
 					variant="h6"
 					sx={{
 						fontWeight: 'bold',
-						background: 'linear-gradient(to right, #42a5f5, #478ed1)',
+						background: 'linear-gradient(to right, #ffffff, #bbdefb)',
 						WebkitBackgroundClip: 'text',
 						WebkitTextFillColor: 'transparent',
 						fontSize: '1.5rem',
