@@ -13,6 +13,7 @@
 	}
 	.text-update {
 		@apply text-base ml-1;
-		color: #197aca;
+		/*color: #197aca;*/
+		color: #01f4e9;
 	}
 }

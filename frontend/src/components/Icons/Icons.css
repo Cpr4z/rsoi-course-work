@@ -10,8 +10,10 @@
 
 	.confirm-icon {
 		@apply icon border; 
-		border-color: #197aca;
-		background-color: #197aca;
+		/*border-color: #197aca;*/
+		border-color: #01f4e9;
+		/*background-color: #197aca;*/
+		background-color: #01f4e9;
 	}
 	.confirm-icon:hover {
 		@apply border-white; 
@@ -19,7 +21,8 @@
 	}
 	.reject-icon {
 		@apply icon border hover:border-2; 
-		border-color: #197aca;
+		/*border-color: #197aca;*/
+		border-color: #01f4e9;
 	}
 	.change-icon {
 		@apply icon hover:bg-gray-600/10;
@@ -29,7 +32,8 @@
 	}
 	.add-icon {
 		@apply icon;
-		background-color: #197aca;
+		/*background-color: #197aca;*/
+		background-color: #01f4e9;
 	}
 	.add-icon:hover {
 		@apply shadow-md shadow-gray-300; 

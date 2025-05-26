@@ -28,7 +28,8 @@
 	.title-row {
 		@apply container py-1 flex mx-auto min-w-full text-white border-b border-gray-400 rounded-b-none rounded-xl;
 		min-width: 60rem;
-		background-color: #197aca;
+		/*background-color: #197aca;*/
+		background-color: #01f4e9;
 	}
 	.title-row-without-buttons {
 		@apply title-row pt-2 pb-2.5;
