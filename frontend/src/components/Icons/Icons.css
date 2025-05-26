@@ -17,7 +17,8 @@
 	}
 	.confirm-icon:hover {
 		@apply border-white; 
-		background-color: #156fb9;
+		/*background-color: #156fb9;*/
+		background-color: #01f4e9;
 	}
 	.reject-icon {
 		@apply icon border hover:border-2; 
@@ -37,7 +38,8 @@
 	}
 	.add-icon:hover {
 		@apply shadow-md shadow-gray-300; 
-		background-color: #156fb9;
+		/*background-color: #156fb9;*/
+		background-color: #01f4e9;
 	}
 	.arrow-icon {
 		@apply icon hover:bg-white/10;
