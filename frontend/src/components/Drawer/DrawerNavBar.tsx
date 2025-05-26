@@ -46,7 +46,13 @@ interface DrawerNavBarProps {
 
 export function DrawerNavBar(props: DrawerNavBarProps) {
 	return (
-		<AppBar position="fixed" open={ false }>
+		<AppBar
+			position="fixed"
+			open={ false }
+			sx={{
+				backgroundColor: '#6200ea'
+			}}
+		>
 			<Toolbar>
 				<IconButton
 					color="inherit"

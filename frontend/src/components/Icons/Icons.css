@@ -9,21 +9,17 @@
 	}
 
 	.confirm-icon {
-		@apply icon border; 
-		/*border-color: #197aca;*/
-		border-color: #01f4e9;
-		/*background-color: #197aca;*/
-		background-color: #01f4e9;
+		@apply icon border;
+		border-color: #6200ea;
+		background-color: #6200ea;
 	}
 	.confirm-icon:hover {
-		@apply border-white; 
-		/*background-color: #156fb9;*/
-		background-color: #01f4e9;
+		@apply border-white;
+		background-color: #6200ea;
 	}
 	.reject-icon {
-		@apply icon border hover:border-2; 
-		/*border-color: #197aca;*/
-		border-color: #01f4e9;
+		@apply icon border hover:border-2;
+		border-color: #6200ea;
 	}
 	.change-icon {
 		@apply icon hover:bg-gray-600/10;
@@ -33,13 +29,11 @@
 	}
 	.add-icon {
 		@apply icon;
-		/*background-color: #197aca;*/
-		background-color: #01f4e9;
+		background-color: #6200ea;
 	}
 	.add-icon:hover {
-		@apply shadow-md shadow-gray-300; 
-		/*background-color: #156fb9;*/
-		background-color: #01f4e9;
+		@apply shadow-md shadow-gray-300;
+		background-color: #6200ea;
 	}
 	.arrow-icon {
 		@apply icon hover:bg-white/10;
