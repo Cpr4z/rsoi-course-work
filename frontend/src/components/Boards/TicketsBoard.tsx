@@ -25,7 +25,11 @@ export function TicketsBoard({ openMiniDrawer, user }: TicketsBoardProps) {
 			<div className={`${openMiniDrawer ? "short-board-container" : "long-board-container"}`}>
 				{ userInfo &&
 					<Alert
-						sx={{	fontSize: 18 }}
+						sx={{
+							fontSize: 18,
+							backgroundColor: '#b388ff',
+							color: '#6200ea'
+						}}
 						severity="info"
 					>
 						{`${user.firstname}, на Вашем счету ${userInfo.privilege.balance} бонусов`}

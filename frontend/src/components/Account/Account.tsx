@@ -38,7 +38,11 @@ export function Account({ user }: AccountProps) {
 
 								<div className="my-5">
 									<Alert
-										sx={{ fontSize: 18 }}
+										sx={{
+											fontSize: 18,
+											backgroundColor: '#b388ff',
+											color: '#6200ea'
+										}}
 										severity="info"
 									>
 										{`На Вашем счету ${privilegeInfo.balance} бонусов`}

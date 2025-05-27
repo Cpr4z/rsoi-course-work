@@ -57,7 +57,11 @@ export function BuyTicketWindow(props: BuyTicketWindowProps) {
 					<TextHeader text="Покупка билета"/>
 
 					<Alert
-						sx={{	fontSize: 18 }}
+						sx={{
+							fontSize: 18,
+							backgroundColor: '#b388ff',
+							color: '#6200ea'
+						}}
 						severity="info"
 					>
 						{`Вам доступно ${props.privilege?.balance} бонусов`}
