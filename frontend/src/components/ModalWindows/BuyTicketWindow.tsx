@@ -60,7 +60,10 @@ export function BuyTicketWindow(props: BuyTicketWindowProps) {
 						sx={{
 							fontSize: 18,
 							backgroundColor: '#b388ff',
-							color: '#6200ea'
+							color: '#6200ea',
+							'& .MuiAlert-icon': {
+								color: '#7c4dff',
+							},
 						}}
 						severity="info"
 					>
@@ -75,6 +78,17 @@ export function BuyTicketWindow(props: BuyTicketWindowProps) {
 						<Switch 
 							checked={ paidFromBalance }
 							onChange={ () => setPaidFromBalance(!paidFromBalance) }
+							sx={{
+								'& .MuiSwitch-switchBase.Mui-checked': {
+									color: '#6200ea',
+								},
+								'& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+									backgroundColor: '#6200ea',
+								},
+								'& .MuiSwitch-track': {
+									backgroundColor: '#bdbdbd',
+								},
+							}}
 						/>
 					</div>
 
